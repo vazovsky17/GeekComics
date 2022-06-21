@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fa="http://schemas.fontawesome.io/icons/">
 
+    <!--  Сделать нормальный шаблон  -->
     <Style x:Key="menuButton" TargetType="RadioButton">
         <Setter Property="Height" Value="48" />
         <Setter Property="Width" Value="200" />
@@ -27,23 +28,17 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#21203b" />
-                <Setter Property="Foreground" Value="#e9e9e9" />
+                <Setter Property="Background" Value="{StaticResource ActiveButtonBackgroundSolidBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource ActiveButtonForeroundSolidBrush}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
                             <Border
                                 Padding="20,0"
                                 Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource ActiveButtonBorderGradientBrush}"
                                 BorderThickness="4,0,0,0"
                                 CornerRadius="20">
-                                <Border.BorderBrush>
-                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Offset="0" Color="#9489ff" />
-                                        <GradientStop Offset="0.5" Color="#7985ff" />
-                                        <GradientStop Offset="1" Color="#6ad8fd" />
-                                    </LinearGradientBrush>
-                                </Border.BorderBrush>
                                 <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
@@ -51,8 +46,27 @@
                 </Setter>
             </Trigger>
             <Trigger Property="IsMouseCaptured" Value="True">
-                <Setter Property="Background" Value="#1a192e" />
-                <Setter Property="Foreground" Value="#ffffff" />
+                <Setter Property="Background" Value="{StaticResource ActiveButtonBackgroundSolidBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource ActiveButtonForeroundSolidBrush}" />
+            </Trigger>
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource ActiveButtonBackgroundSolidBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource ActiveButtonForeroundSolidBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border
+                                Padding="20,0"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource ActiveButtonBorderGradientBrush}"
+                                BorderThickness="4,0,0,0"
+                                CornerRadius="20">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -86,23 +100,17 @@
         x:Key="activeMenuButton"
         BasedOn="{StaticResource menuButton}"
         TargetType="RadioButton">
-        <Setter Property="Background" Value="#21203b" />
-        <Setter Property="Foreground" Value="#e9e9e9" />
+        <Setter Property="Background" Value="{StaticResource ActiveButtonBackgroundSolidBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ActiveButtonForeroundSolidBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border
                         Padding="20,0"
                         Background="{TemplateBinding Background}"
+                        BorderBrush="{StaticResource ActiveButtonBorderGradientBrush}"
                         BorderThickness="4,0,0,0"
                         CornerRadius="20">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                <GradientStop Offset="0" Color="#9489ff" />
-                                <GradientStop Offset="0.5" Color="#7985ff" />
-                                <GradientStop Offset="1" Color="#6ad8fd" />
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
                         <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>

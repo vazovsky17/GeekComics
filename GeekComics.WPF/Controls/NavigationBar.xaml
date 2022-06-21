@@ -11,6 +11,9 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
+        <Grid.Resources>
+            <Style BasedOn="{StaticResource menuButton}" TargetType="RadioButton" />
+        </Grid.Resources>
         <StackPanel Width="240">
             <StackPanel Margin="30,50" Orientation="Horizontal">
                 <fa:ImageAwesome
@@ -26,10 +29,7 @@
                     Text="GeekComics" />
             </StackPanel>
 
-            <RadioButton
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static nav:ViewType.PROFILE}"
-                Style="{StaticResource menuButton}">
+            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.PROFILE}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="User" Style="{StaticResource buttonIcon}" />
@@ -42,10 +42,7 @@
                 </Grid>
             </RadioButton>
 
-            <RadioButton
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static nav:ViewType.CATALOG}"
-                Style="{StaticResource menuButton}">
+            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.CATALOG}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Home" Style="{StaticResource buttonIcon}" />
@@ -57,10 +54,7 @@
                         Style="{StaticResource buttonIconExpanded}" />
                 </Grid>
             </RadioButton>
-            <RadioButton
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static nav:ViewType.ORDERS}"
-                Style="{StaticResource menuButton}">
+            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ORDERS}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="ShoppingBasket" Style="{StaticResource buttonIcon}" />
@@ -72,10 +66,7 @@
                         Style="{StaticResource buttonIconExpanded}" />
                 </Grid>
             </RadioButton>
-            <RadioButton
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static nav:ViewType.BONUSES}"
-                Style="{StaticResource menuButton}">
+            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.BONUSES}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Gift" Style="{StaticResource buttonIcon}" />
