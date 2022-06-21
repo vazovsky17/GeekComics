@@ -6,17 +6,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GeekComics.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="1000"
+    Height="600"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
-        <!-- Изменить дизайн -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}" />
-        <ContentControl Grid.Row="1" Content="{Binding Navigator.CurrentViewModel}" />
+        <!--  Background Grid  -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Width="220"
+                Background="{StaticResource NavigationGradientBrush}"
+                CornerRadius="25 0 0 25" />
+            <Border
+                Grid.Column="1"
+                Background="{StaticResource ContentGradientBrush}"
+                CornerRadius="0 25 25 0" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:NavigationBar Grid.Column="0" DataContext="{Binding Navigator}" />
+            <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}" />
+        </Grid>
     </Grid>
 </Window>
