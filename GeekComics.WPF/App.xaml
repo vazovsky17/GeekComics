@@ -1,0 +1,29 @@
+﻿<Application
+    x:Class="GeekComics.WPF.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:GeekComics.WPF"
+    xmlns:viewModels="clr-namespace:GeekComics.WPF.ViewModels"
+    xmlns:views="clr-namespace:GeekComics.WPF.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModels:ProfileViewModel}">
+                <views:ProfileView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CatalogViewModel}">
+                <views:CatalogView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:OrdersViewModel}">
+                <views:OrdersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BonusesViewModel}">
+                <views:BonusesView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
