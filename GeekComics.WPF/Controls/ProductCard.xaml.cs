@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace GeekComics.WPF.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для NavigationBar.xaml
+    /// Логика взаимодействия для ProductCard.xaml
     /// </summary>
-    public partial class NavigationBar : UserControl
+    public partial class ProductCard : UserControl
     {
-        public NavigationBar()
+        public ProductCard()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

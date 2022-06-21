@@ -14,6 +14,9 @@
     <Color x:Key="ActiveButtonColorBackground">#21203b</Color>
     <Color x:Key="ActiveButtonColorForeground">#e9e9e9</Color>
 
+    <Color x:Key="CardBorderColor">#362f54</Color>
+    <Color x:Key="CardForegroundColor">#e0e0e0</Color>
+
     <!--  Brushes  -->
     <LinearGradientBrush x:Key="NavigationGradientBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Offset="0" Color="{StaticResource NavigationColorStart}" />
@@ -33,5 +36,9 @@
 
     <SolidColorBrush x:Key="ActiveButtonBackgroundSolidBrush" Color="{StaticResource ActiveButtonColorBackground}" />
     <SolidColorBrush x:Key="ActiveButtonForeroundSolidBrush" Color="{StaticResource ActiveButtonColorForeground}" />
+
+    <SolidColorBrush x:Key="CardBorderSolidBrush" Color="{StaticResource CardBorderColor}" />
+    <SolidColorBrush x:Key="CardForegroundSolidBrush" Color="{StaticResource CardForegroundColor}" />
+
 
 </ResourceDictionary>

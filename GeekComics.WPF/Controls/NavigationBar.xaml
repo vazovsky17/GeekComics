@@ -42,7 +42,11 @@
                 </Grid>
             </RadioButton>
 
-            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.CATALOG}">
+            <!--  По-другому реализовать стартовый экран  -->
+            <RadioButton
+                Command="{Binding UpdateCurrentViewModelCommand}"
+                CommandParameter="{x:Static nav:ViewType.CATALOG}"
+                IsChecked="True">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Home" Style="{StaticResource buttonIcon}" />

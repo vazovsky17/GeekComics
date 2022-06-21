@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeekComics.EntityFramework.Migrations
 {
     [DbContext(typeof(GeekComicsDbContext))]
-    [Migration("20220621044937_Initial")]
+    [Migration("20220621154709_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,23 +57,13 @@ namespace GeekComics.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<double>("BonusCount")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsAccrual")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("BonusHistory");
                 });
@@ -113,8 +103,8 @@ namespace GeekComics.EntityFramework.Migrations
                     b.Property<int?>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<double>("AccruedBonusesCount")
-                        .HasColumnType("float");
+                    b.Property<int>("BonusActionId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -125,12 +115,11 @@ namespace GeekComics.EntityFramework.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<double>("SpentBonusesCount")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
+
+                    b.HasIndex("BonusActionId");
 
                     b.ToTable("Orders");
                 });
@@ -151,9 +140,6 @@ namespace GeekComics.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Price")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -166,9 +152,38 @@ namespace GeekComics.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("GeekComics.Domain.Models.ProductInBusket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Products");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Busket");
                 });
 
             modelBuilder.Entity("GeekComics.Domain.Models.User", b =>
@@ -203,21 +218,6 @@ namespace GeekComics.EntityFramework.Migrations
                     b.Navigation("AccountHolder");
                 });
 
-            modelBuilder.Entity("GeekComics.Domain.Models.BonusAction", b =>
-                {
-                    b.HasOne("GeekComics.Domain.Models.Account", null)
-                        .WithMany("BonusHistory")
-                        .HasForeignKey("AccountId");
-
-                    b.HasOne("GeekComics.Domain.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("GeekComics.Domain.Models.Employee", b =>
                 {
                     b.HasOne("GeekComics.Domain.Models.Account", "Account")
@@ -234,18 +234,38 @@ namespace GeekComics.EntityFramework.Migrations
                     b.HasOne("GeekComics.Domain.Models.Account", null)
                         .WithMany("Orders")
                         .HasForeignKey("AccountId");
+
+                    b.HasOne("GeekComics.Domain.Models.BonusAction", "BonusAction")
+                        .WithMany()
+                        .HasForeignKey("BonusActionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BonusAction");
                 });
 
-            modelBuilder.Entity("GeekComics.Domain.Models.Product", b =>
+            modelBuilder.Entity("GeekComics.Domain.Models.ProductInBusket", b =>
                 {
+                    b.HasOne("GeekComics.Domain.Models.Account", null)
+                        .WithMany("Busket")
+                        .HasForeignKey("AccountId");
+
                     b.HasOne("GeekComics.Domain.Models.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
+
+                    b.HasOne("GeekComics.Domain.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("GeekComics.Domain.Models.Account", b =>
                 {
-                    b.Navigation("BonusHistory");
+                    b.Navigation("Busket");
 
                     b.Navigation("Orders");
                 });

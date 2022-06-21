@@ -8,6 +8,7 @@ namespace GeekComics.WPF.ViewModels
 
         public MainViewModel()
         {
+            Navigator.CurrentViewModel = new CatalogViewModel();
 
         }
     }

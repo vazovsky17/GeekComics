@@ -1,4 +1,6 @@
-﻿namespace GeekComics.Domain.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GeekComics.Domain.Models
 {
     /// <summary> Общий объект, имеющий Id </summary>
     public class DomainObject
