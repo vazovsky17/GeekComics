@@ -21,7 +21,7 @@
                 HorizontalAlignment="Center"
                 FontSize="18"
                 Foreground="{StaticResource CardForegroundSolidBrush}"
-                Text="{Binding Product.Name}" />
+                Text="{Binding Product.Name, FallbackValue=Name}" />
             <Image
                 Grid.Row="1"
                 Width="200"
@@ -39,12 +39,12 @@
                     HorizontalAlignment="Left"
                     FontSize="14"
                     Foreground="{StaticResource CardForegroundSolidBrush}"
-                    Text="В наличии" />
+                    Text="Available" />
                 <TextBlock
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     Foreground="{StaticResource CardForegroundSolidBrush}"
-                    Text="{Binding Product.Price}" />
+                    Text="{Binding Product.Price, FallbackValue=Price}" />
             </Grid>
             <Button
                 Grid.Row="3"

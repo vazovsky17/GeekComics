@@ -2,14 +2,19 @@
     x:Class="GeekComics.WPF.Controls.NavigationBar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:GeekComics.WPF.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:local="clr-namespace:GeekComics.WPF.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:nav="clr-namespace:GeekComics.WPF.State.Navigators"
+    xmlns:vm="clr-namespace:GeekComics.WPF.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <Style BasedOn="{StaticResource menuButton}" TargetType="RadioButton" />
@@ -29,7 +34,10 @@
                     Text="GeekComics" />
             </StackPanel>
 
-            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.PROFILE}">
+            <RadioButton
+                Command="{Binding UpdateCurrentViewModelCommand}"
+                CommandParameter="{x:Static nav:ViewType.PROFILE}"
+                IsChecked="{Binding CurrentViewModel, Mode=OneWay, ConverterParameter={x:Type vm:ProfileViewModel}, Converter={StaticResource EqualValueToParameterConverter}}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="User" Style="{StaticResource buttonIcon}" />
@@ -42,11 +50,11 @@
                 </Grid>
             </RadioButton>
 
-            <!--  По-другому реализовать стартовый экран  -->
+            <!--  TODO По-другому реализовать стартовый экран  -->
             <RadioButton
                 Command="{Binding UpdateCurrentViewModelCommand}"
                 CommandParameter="{x:Static nav:ViewType.CATALOG}"
-                IsChecked="True">
+                IsChecked="{Binding CurrentViewModel, Mode=OneWay, ConverterParameter={x:Type vm:CatalogViewModel}, Converter={StaticResource EqualValueToParameterConverter}}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Home" Style="{StaticResource buttonIcon}" />
@@ -58,7 +66,10 @@
                         Style="{StaticResource buttonIconExpanded}" />
                 </Grid>
             </RadioButton>
-            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ORDERS}">
+            <RadioButton
+                Command="{Binding UpdateCurrentViewModelCommand}"
+                CommandParameter="{x:Static nav:ViewType.ORDERS}"
+                IsChecked="{Binding CurrentViewModel, Mode=OneWay, ConverterParameter={x:Type vm:OrdersViewModel}, Converter={StaticResource EqualValueToParameterConverter}}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="ShoppingBasket" Style="{StaticResource buttonIcon}" />
@@ -70,7 +81,10 @@
                         Style="{StaticResource buttonIconExpanded}" />
                 </Grid>
             </RadioButton>
-            <RadioButton Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.BONUSES}">
+            <RadioButton
+                Command="{Binding UpdateCurrentViewModelCommand}"
+                CommandParameter="{x:Static nav:ViewType.BONUSES}"
+                IsChecked="{Binding CurrentViewModel, Mode=OneWay, ConverterParameter={x:Type vm:BonusesViewModel}, Converter={StaticResource EqualValueToParameterConverter}}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Gift" Style="{StaticResource buttonIcon}" />

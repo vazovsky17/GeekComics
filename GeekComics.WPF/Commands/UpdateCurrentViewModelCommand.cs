@@ -37,7 +37,7 @@ namespace GeekComics.WPF.Commands
                         _navigator.CurrentViewModel = new ProfileViewModel();
                         break;
                     case ViewType.BONUSES:
-                        _navigator.CurrentViewModel = new BonusesViewModel();
+                        _navigator.CurrentViewModel = BonusesViewModel.LoadViewModel(new GenericDataService<BonusAction>(new GeekComicsDbContextFactory()));
                         break;
                     case ViewType.ORDERS:
                         _navigator.CurrentViewModel = OrdersViewModel.LoadViewModel(new GenericDataService<Order>(new GeekComicsDbContextFactory()));
