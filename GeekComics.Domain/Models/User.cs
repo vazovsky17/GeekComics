@@ -7,6 +7,6 @@
         public string Username { get; set; }
 
         /// <summary> Пароль для авторизации </summary>
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
