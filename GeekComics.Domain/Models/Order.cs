@@ -17,5 +17,8 @@
 
         /// <summary> Дата доставки </summary>
         public DateTime DateDelivered { get; set; }
+
+        /// <summary> Отменен ли заказ </summary>
+        public bool IsCancelled { get; set; }
     }
 }

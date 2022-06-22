@@ -11,11 +11,14 @@ namespace GeekComics.Domain.Models
         /// <summary> Количество имеющихся у пользователя бонусов </summary>
         public double BonusCount { get; set; }
 
+        /// <summary> Баланс аккаунта </summary>
+        public double Balance { get; set; }
+
         /// <summary> Заказы </summary>
-        public IEnumerable<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
         /// <summary> Корзина </summary>
-        public IEnumerable<ProductInBusket> Busket { get; set; }
+        public ICollection<ProductInBusket> Busket { get; set; }
 
         /// <summary> Адрес доставки </summary>
         public string AddressDelivery { get; set; }

@@ -19,6 +19,7 @@ namespace GeekComics.Domain.Services.AuthentificationServices
         /// <returns>Аккаунт</returns>
         /// <exception cref="UserNotFoundException">Пользователь не существует.</exception>
         /// <exception cref="InvalidPasswordException">Неверный пароль.</exception>
+        /// <exception cref="InvalidAdministrationCodeException">Неверно введенный код администратора.</exception>
         /// <exception cref="Exception">Вход не удался.</exception>
         Task<Account> Login(string username, string password, string? administrationCode);
 

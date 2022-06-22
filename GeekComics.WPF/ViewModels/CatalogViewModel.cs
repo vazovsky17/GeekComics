@@ -52,7 +52,7 @@ namespace GeekComics.WPF.ViewModels
 
                     }
                     ProductViewModel = new ProductViewModel(_products.FirstOrDefault());
-                    MessageBox.Show(_products.FirstOrDefault().Name.ToString());
+                    //MessageBox.Show(_products.FirstOrDefault().Name.ToString());
                 }
                 else
                 {

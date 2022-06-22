@@ -10,7 +10,7 @@
         public string Description { get; set; }
 
         /// <summary> Стоимость </summary>
-        public string Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary> Количество в наличии в магазине </summary>
         public int StoreAvailabilityCount { get; set; }
