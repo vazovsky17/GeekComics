@@ -8,5 +8,8 @@
 
         /// <summary> Пароль для авторизации </summary>
         public string PasswordHash { get; set; }
+
+        /// <summary> Роль </summary>
+        public Role Role { get; set; }
     }
 }

@@ -6,6 +6,8 @@ namespace GeekComics.Domain.Services.AuthentificationServices
 {
     public class AuthenticationService : IAuthenticationService
     {
+        // TODO: Засунуть код администрации в сеттинги
+        private readonly string AdministrationCode = "883306";
         private readonly IAccountService _accountService;
         private readonly IPasswordHasher _passwordHasher;
 
@@ -15,8 +17,13 @@ namespace GeekComics.Domain.Services.AuthentificationServices
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<Account> Login(string username, string password)
+        public async Task<Account> Login(string username, string password, string? administrationCode)
         {
+            if (administrationCode != AdministrationCode)
+            {
+                throw new InvalidAdministrationCodeException();
+            }
+
             Account storedAccount = await _accountService.GetByUsername(username);
             if (storedAccount == null)
             {
@@ -32,9 +39,15 @@ namespace GeekComics.Domain.Services.AuthentificationServices
             return storedAccount;
         }
 
-        public async Task<RegistrationResult> Register(string username, string password, string confirmPassword)
+        public async Task<RegistrationResult> Register(string username, string password, string confirmPassword, Role role, string? administrationCode)
         {
             RegistrationResult result = RegistrationResult.Success;
+
+            if (administrationCode != AdministrationCode)
+            {
+                result = RegistrationResult.InvalidAdministrationCode;
+            }
+
             if (password != confirmPassword)
             {
                 result = RegistrationResult.PasswordsDoNotMatch;
