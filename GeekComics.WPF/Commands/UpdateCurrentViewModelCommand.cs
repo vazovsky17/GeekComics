@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using GeekComics.Domain.Models;
+using GeekComics.EntityFramework;
+using GeekComics.EntityFramework.Services;
 using GeekComics.WPF.State.Navigators;
 using GeekComics.WPF.ViewModels;
 
@@ -28,7 +31,7 @@ namespace GeekComics.WPF.Commands
                 switch (viewType)
                 {
                     case ViewType.CATALOG:
-                        _navigator.CurrentViewModel = new CatalogViewModel();
+                        _navigator.CurrentViewModel = CatalogViewModel.LoadViewModel(new GenericDataService<Product>(new GeekComicsDbContextFactory()));
                         break;
                     case ViewType.PROFILE:
                         _navigator.CurrentViewModel = new ProfileViewModel();
@@ -37,7 +40,7 @@ namespace GeekComics.WPF.Commands
                         _navigator.CurrentViewModel = new BonusesViewModel();
                         break;
                     case ViewType.ORDERS:
-                        _navigator.CurrentViewModel = new OrdersViewModel();
+                        _navigator.CurrentViewModel = OrdersViewModel.LoadViewModel(new GenericDataService<Order>(new GeekComicsDbContextFactory()));
                         break;
                     default:
                         break;

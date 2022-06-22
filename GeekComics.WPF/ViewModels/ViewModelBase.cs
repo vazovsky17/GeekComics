@@ -1,6 +1,8 @@
-﻿namespace GeekComics.WPF.ViewModels
+﻿using GeekComics.WPF.Models;
+
+namespace GeekComics.WPF.ViewModels
 {
-    public class ViewModelBase
+    public class ViewModelBase : ObservableObject
     {
     }
 }

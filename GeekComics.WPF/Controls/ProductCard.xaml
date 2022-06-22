@@ -3,31 +3,31 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GeekComics.WPF.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="400"
-    d:DesignWidth="300"
+    xmlns:viewmodels="clr-namespace:GeekComics.WPF.ViewModels"
+    MaxWidth="300"
+    MaxHeight="500"
     mc:Ignorable="d">
-    <Border Style="{StaticResource CardBorder}">
+    <Border Margin="16" Style="{StaticResource CardBorder}">
         <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock
-                Foreground="{StaticResource CardForegroundSolidBrush}"
                 Grid.Row="0"
                 HorizontalAlignment="Center"
-                d:Text="Атака титанов"
                 FontSize="18"
-                Text="{Binding Name}" />
+                Foreground="{StaticResource CardForegroundSolidBrush}"
+                Text="{Binding Product.Name}" />
             <Image
                 Grid.Row="1"
                 Width="200"
                 Height="200"
                 Margin="0,20" />
+
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -35,20 +35,29 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
-                    Margin="0,0,5,0"
+                    Margin="0,0,4,0"
                     HorizontalAlignment="Left"
                     FontSize="14"
+                    Foreground="{StaticResource CardForegroundSolidBrush}"
                     Text="В наличии" />
                 <TextBlock
                     Grid.Column="1"
                     HorizontalAlignment="Right"
-                    d:Text="1500 Р"
-                    Text="{Binding Price}" />
+                    Foreground="{StaticResource CardForegroundSolidBrush}"
+                    Text="{Binding Product.Price}" />
             </Grid>
             <Button
                 Grid.Row="3"
+                Margin="0,8"
+                VerticalAlignment="Bottom"
                 d:Command="{Binding AddToBusketCommand}"
-                Content="Add to Busket" />
+                Style="{StaticResource CardButton}">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="Add To Busket" />
+            </Button>
         </Grid>
     </Border>
 </UserControl>

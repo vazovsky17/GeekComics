@@ -10,8 +10,10 @@ namespace GeekComics.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            Window window = new MainWindow
+            {
+                DataContext = new MainViewModel()
+            };
             window.Show();
             base.OnStartup(e);
         }

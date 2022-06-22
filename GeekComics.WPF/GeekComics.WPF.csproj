@@ -11,4 +11,8 @@
     <PackageReference Include="FontAwesome.UWP" Version="4.7.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GeekComics.EntityFramework\GeekComics.EntityFramework.csproj" />
+  </ItemGroup>
+
 </Project>
