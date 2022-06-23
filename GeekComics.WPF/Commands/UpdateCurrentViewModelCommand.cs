@@ -5,17 +5,21 @@ using GeekComics.EntityFramework;
 using GeekComics.EntityFramework.Services;
 using GeekComics.WPF.State.Navigators;
 using GeekComics.WPF.ViewModels;
+using GeekComics.WPF.ViewModels.Factories;
 
 namespace GeekComics.WPF.Commands
 {
     public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
-        private INavigator _navigator;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
+        private readonly INavigator _navigator;
+        private readonly IGeekComicsViewModelFactory _viewModelFactory;
+
+        public UpdateCurrentViewModelCommand(INavigator navigator, IGeekComicsViewModelFactory viewModelFactory)
         {
             _navigator = navigator;
+            _viewModelFactory = viewModelFactory;
         }
 
         public bool CanExecute(object? parameter)
@@ -28,23 +32,8 @@ namespace GeekComics.WPF.Commands
             if (parameter is ViewType)
             {
                 ViewType viewType = (ViewType) parameter;
-                switch (viewType)
-                {
-                    case ViewType.CATALOG:
-                        _navigator.CurrentViewModel = CatalogViewModel.LoadViewModel(new GenericDataService<Product>(new GeekComicsDbContextFactory()));
-                        break;
-                    case ViewType.PROFILE:
-                        _navigator.CurrentViewModel = new ProfileViewModel();
-                        break;
-                    case ViewType.BONUSES:
-                        _navigator.CurrentViewModel = BonusesViewModel.LoadViewModel(new GenericDataService<BonusAction>(new GeekComicsDbContextFactory()));
-                        break;
-                    case ViewType.ORDERS:
-                        _navigator.CurrentViewModel = OrdersViewModel.LoadViewModel(new GenericDataService<Order>(new GeekComicsDbContextFactory()));
-                        break;
-                    default:
-                        break;
-                }
+
+                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
         }
     }

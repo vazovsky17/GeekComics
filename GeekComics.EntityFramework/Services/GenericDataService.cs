@@ -1,7 +1,7 @@
 ﻿using GeekComics.Domain.Models;
 using GeekComics.Domain.Services;
+using GeekComics.EntityFramework.Services.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GeekComics.EntityFramework.Services
 {
@@ -9,50 +9,45 @@ namespace GeekComics.EntityFramework.Services
     {
         /** Можно было бы создать просто контекст, но лучше фабрику, чтобы куча потоков не использовала один контекст */
         private readonly GeekComicsDbContextFactory _contextFactory;
+        private readonly NonQueryDataService<T> _nonQueryDataService;
 
         public GenericDataService(GeekComicsDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
+            _nonQueryDataService = new NonQueryDataService<T>(contextFactory);
         }
 
         public async Task<T> Create(T entity)
         {
-            using GeekComicsDbContext context = _contextFactory.CreateDbContext();
-            EntityEntry<T> createdResult = await context.Set<T>().AddAsync(entity);
-            await context.SaveChangesAsync();
-            return createdResult.Entity;
+            return await _nonQueryDataService.Create(entity);
         }
 
         public async Task<bool> Delete(int id)
         {
-            using GeekComicsDbContext context = _contextFactory.CreateDbContext();
-            T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
-            context.Set<T>().Remove(entity);
-            await context.SaveChangesAsync();
-            return true;
+            return await _nonQueryDataService.Delete(id);
         }
 
         public async Task<T> Get(int id)
         {
-            using GeekComicsDbContext context = _contextFactory.CreateDbContext();
-            T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
-            return entity;
+            using (GeekComicsDbContext context = _contextFactory.CreateDbContext())
+            {
+                T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
+                return entity;
+            }
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            using GeekComicsDbContext context = _contextFactory.CreateDbContext();
-            IEnumerable<T> enities = await context.Set<T>().ToListAsync();
-            return enities;
+            using (GeekComicsDbContext context = _contextFactory.CreateDbContext())
+            {
+                IEnumerable<T> entities = await context.Set<T>().ToListAsync();
+                return entities;
+            }
         }
 
         public async Task<T> Update(int id, T entity)
         {
-            using GeekComicsDbContext context = _contextFactory.CreateDbContext();
-            entity.Id = id;
-            context.Set<T>().Update(entity);
-            await context.SaveChangesAsync();
-            return entity;
+            return await _nonQueryDataService.Update(id, entity);
         }
     }
 }

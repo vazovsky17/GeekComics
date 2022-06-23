@@ -1,4 +1,4 @@
-﻿using System.Windows.Input;
+﻿using System;
 using GeekComics.WPF.ViewModels;
 
 namespace GeekComics.WPF.State.Navigators
@@ -9,11 +9,13 @@ namespace GeekComics.WPF.State.Navigators
         PROFILE,
         BONUSES,
         ORDERS,
+        LOGIN
     }
 
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
+        //ICommand UpdateCurrentViewModelCommand { get; }
+        event Action StateChanged;
     }
 }
