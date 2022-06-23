@@ -4,6 +4,7 @@ using GeekComics.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeekComics.EntityFramework.Migrations
 {
     [DbContext(typeof(GeekComicsDbContext))]
-    partial class GeekComicsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220623003457_Initial2")]
+    partial class Initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +60,6 @@ namespace GeekComics.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<double>("BonusCount")
                         .HasColumnType("float");
 
@@ -68,8 +67,6 @@ namespace GeekComics.EntityFramework.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.ToTable("BonusHistory");
                 });
@@ -229,13 +226,6 @@ namespace GeekComics.EntityFramework.Migrations
                     b.Navigation("AccountHolder");
                 });
 
-            modelBuilder.Entity("GeekComics.Domain.Models.BonusAction", b =>
-                {
-                    b.HasOne("GeekComics.Domain.Models.Account", null)
-                        .WithMany("BonusHistory")
-                        .HasForeignKey("AccountId");
-                });
-
             modelBuilder.Entity("GeekComics.Domain.Models.Employee", b =>
                 {
                     b.HasOne("GeekComics.Domain.Models.Account", "Account")
@@ -283,8 +273,6 @@ namespace GeekComics.EntityFramework.Migrations
 
             modelBuilder.Entity("GeekComics.Domain.Models.Account", b =>
                 {
-                    b.Navigation("BonusHistory");
-
                     b.Navigation("Busket");
 
                     b.Navigation("Orders");

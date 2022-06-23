@@ -8,6 +8,8 @@ namespace GeekComics.Domain.Models
         /// <summary> Владелец аккаунта (чтобы не хранить все заказы и прочее в купе с регистрационными данными) </summary>
         public User AccountHolder { get; set; }
 
+        public ICollection<BonusAction> BonusHistory { get; set; }
+
         /// <summary> Количество имеющихся у пользователя бонусов </summary>
         public double BonusCount { get; set; }
 

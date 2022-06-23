@@ -4,7 +4,14 @@ namespace GeekComics.Domain.Services.BusketService
 {
     public class BusketService : IBusketService
     {
+        // TODO: Сделать с исключениями
+
         private readonly IDataService<Account> _accountService;
+
+        public BusketService(IDataService<Account> accountService)
+        {
+            _accountService = accountService;
+        }
 
         public async Task<AddToBusketResult> AddProductToBusket(Account account, Product product, int count)
         {

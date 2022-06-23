@@ -4,6 +4,8 @@ using GeekComics.Domain.Services.OrdersService;
 
 namespace GeekComics.Domain.Services.OrderServices
 {
+    // TODO: Сделать с исключениями
+
     public class OrderService : IOrderService
     {
         private readonly IDataService<Account> _accountService;
@@ -11,9 +13,12 @@ namespace GeekComics.Domain.Services.OrderServices
         private readonly IDataService<BonusAction> _bonusesService;
         private readonly IDataService<Product> _productService;
 
-        public OrderService(IDataService<Account> accountService)
+        public OrderService(IDataService<Account> accountService, IDataService<Order> ordersService, IDataService<BonusAction> bonusesService, IDataService<Product> productService)
         {
             _accountService = accountService;
+            _ordersService = ordersService;
+            _bonusesService = bonusesService;
+            _productService = productService;
         }
 
         public async Task<CreateOrderResult> CreateOrder(Account buyer, IEnumerable<ProductInBusket> products, bool isWastedBonuses)
@@ -61,9 +66,9 @@ namespace GeekComics.Domain.Services.OrderServices
                     BonusCount = bonusAccrual == 0 ? bonusWasted : bonusAccrual,
                     IsAccrual = bonusAccrual != 0,
                 };
+                buyer.BonusHistory.Add(action);
 
-
-                await _bonusesService.Create(action);
+                // await _bonusesService.Create(action);
 
                 buyer.BonusCount += bonusAccrual;
                 buyer.BonusCount -= bonusWasted;
@@ -77,7 +82,7 @@ namespace GeekComics.Domain.Services.OrderServices
                     DateDelivered = dateDelivered,
                     IsCancelled = false
                 };
-                await _ordersService.Create(order);
+                // await _ordersService.Create(order);
 
                 buyer.Balance -= price;
                 buyer.Orders.Add(order);
@@ -118,20 +123,21 @@ namespace GeekComics.Domain.Services.OrderServices
             }
             buyer.Balance += order.Price;
 
-            BonusAction bonusAction = new BonusAction()
+            BonusAction action = new BonusAction()
             {
                 BonusCount = order.BonusAction.BonusCount,
                 IsAccrual = !order.BonusAction.IsAccrual
             };
-            await _bonusesService.Create(bonusAction);
+            // await _bonusesService.Create(bonusAction);
+            buyer.BonusHistory.Add(action);
 
-            if (bonusAction.IsAccrual)
+            if (action.IsAccrual)
             {
-                buyer.BonusCount += bonusAction.BonusCount;
+                buyer.BonusCount += action.BonusCount;
             }
             else
             {
-                buyer.BonusCount -= bonusAction.BonusCount;
+                buyer.BonusCount -= action.BonusCount;
             }
             await _accountService.Update(buyer.Id, buyer);
 
