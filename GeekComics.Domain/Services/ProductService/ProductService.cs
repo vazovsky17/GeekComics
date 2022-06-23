@@ -20,16 +20,16 @@ namespace GeekComics.Domain.Services.ProductService
             return createdProduct;
         }
 
-        public async Task<bool> DeleteProductFromCatalog(Product product)
+        public async Task<Product> UpdateProductInCatalog(int productId, Product product)
         {
-            bool isDeleted = await _productService.Delete(product.Id);
-            return isDeleted;
+            Product updatedProduct = await _productService.Update(productId, product);
+            return updatedProduct;
         }
 
-        public async Task<Product> UpdateProductInCatalog(Product product)
+        public async Task<bool> DeleteProductFromCatalog(int productId)
         {
-            Product updatedProduct = await _productService.Update(product.Id, product);
-            return updatedProduct;
+            bool isDeleted = await _productService.Delete(productId);
+            return isDeleted;
         }
     }
 }

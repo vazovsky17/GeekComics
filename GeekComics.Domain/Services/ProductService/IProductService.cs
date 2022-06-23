@@ -16,13 +16,13 @@ namespace GeekComics.Domain.Services.ProductService
         /// </summary>
         /// <param name="product">Обновленная версия товара</param>
         /// <returns>Измененный товар</returns>
-        Task<Product> UpdateProductInCatalog(Product product);
+        Task<Product> UpdateProductInCatalog(int productId, Product product);
 
         /// <summary>
         /// Удаление товара из каталога
         /// </summary>
-        /// <param name="product">Удаляемый товар</param>
+        /// <param name="productId">ID удаляемого товара</param>
         /// <returns>Удален ли товар</returns>
-        Task<bool> DeleteProductFromCatalog(Product product);
+        Task<bool> DeleteProductFromCatalog(int productId);
     }
 }

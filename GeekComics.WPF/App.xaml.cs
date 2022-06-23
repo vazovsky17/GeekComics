@@ -2,10 +2,15 @@
 using System.Windows;
 using GeekComics.Domain.Models;
 using GeekComics.Domain.Services;
+using GeekComics.Domain.Services.BusketService;
+using GeekComics.Domain.Services.OrderServices;
+using GeekComics.Domain.Services.OrdersService;
 using GeekComics.Domain.Services.ProductService;
 using GeekComics.EntityFramework;
 using GeekComics.EntityFramework.Services;
+using GeekComics.WPF.State.Navigators;
 using GeekComics.WPF.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekComics.WPF
 {
@@ -16,38 +21,35 @@ namespace GeekComics.WPF
     {
         protected async override void OnStartup(StartupEventArgs e)
         {
-            GeekComicsDbContextFactory contextFactory = new EntityFramework.GeekComicsDbContextFactory();
-            IAccountService accountService = new AccountDataService(contextFactory);
-            IDataService<Product> productDataService = new GenericDataService<Product>(contextFactory);
-            IProductService productService = new ProductService(productDataService);
-            await accountService.Create(new Account
-            {
-                AccountHolder = new User
-                {
-                    Username = "Mark",
-                    PasswordHash = "lol",
-                    Role = Role.ADMINISTRATOR,
-                },
-                Balance = 500,
-                BonusCount = 500,
-                AddressDelivery = "Первомайская"
-            });
-
-            await productService.AddProductToCatalog(
-                new Product
-                {
-                    Name = "Сумерки",
-                    Description = "Сага",
-                    Price = 100
-                });
-
-
+            IServiceProvider serviceProvider = CreateServiceProvider();
             Window window = new MainWindow
             {
-                DataContext = new MainViewModel()
+                DataContext = serviceProvider.GetRequiredService<MainViewModel>()
             };
+
             window.Show();
             base.OnStartup(e);
+        }
+
+        private IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<GeekComicsDbContextFactory>();
+
+            services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<MainViewModel>();
+
+            services.AddSingleton<IDataService<Product>, GenericDataService<Product>>();
+            services.AddSingleton<IDataService<Order>, GenericDataService<Order>>();
+            services.AddSingleton<IDataService<ProductInBusket>, GenericDataService<ProductInBusket>>();
+
+            services.AddSingleton<IAccountService, AccountDataService>();
+            services.AddSingleton<IProductService, ProductService>();
+            services.AddSingleton<IOrderService, OrderService>();
+            services.AddSingleton<IBusketService, BusketService>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
