@@ -3,6 +3,9 @@
     /// <summary> Данные о заказе </summary>
     public class Order : DomainObject
     {
+        /// <summary> Аккаунт, с которого происходит заказ </summary>
+        public Account Buyer { get; set; }
+
         /// <summary> Список товаров </summary>
         public IEnumerable<ProductInBusket> Products { get; set; }
 

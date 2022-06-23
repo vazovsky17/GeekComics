@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.UWP" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

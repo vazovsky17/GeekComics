@@ -1,4 +1,5 @@
-﻿using GeekComics.Domain.Models;
+﻿using System.Security.Principal;
+using GeekComics.Domain.Models;
 using GeekComics.Domain.Services.BusketService;
 using GeekComics.Domain.Services.OrdersService;
 
@@ -75,6 +76,7 @@ namespace GeekComics.Domain.Services.OrderServices
 
                 Order order = new Order()
                 {
+                    Buyer = buyer,
                     Products = products,
                     Price = price,
                     BonusAction = action,

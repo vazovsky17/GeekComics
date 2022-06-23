@@ -3,6 +3,7 @@ using System.Windows;
 using GeekComics.Domain.Models;
 using GeekComics.Domain.Services;
 using GeekComics.Domain.Services.ProductService;
+using GeekComics.EntityFramework;
 using GeekComics.EntityFramework.Services;
 using GeekComics.WPF.ViewModels;
 
@@ -15,7 +16,10 @@ namespace GeekComics.WPF
     {
         protected async override void OnStartup(StartupEventArgs e)
         {
-            IAccountService accountService = new AccountDataService(new EntityFramework.GeekComicsDbContextFactory());
+            GeekComicsDbContextFactory contextFactory = new EntityFramework.GeekComicsDbContextFactory();
+            IAccountService accountService = new AccountDataService(contextFactory);
+            IDataService<Product> productDataService = new GenericDataService<Product>(contextFactory);
+            IProductService productService = new ProductService(productDataService);
             await accountService.Create(new Account
             {
                 AccountHolder = new User
@@ -29,6 +33,13 @@ namespace GeekComics.WPF
                 AddressDelivery = "Первомайская"
             });
 
+            await productService.AddProductToCatalog(
+                new Product
+                {
+                    Name = "Сумерки",
+                    Description = "Сага",
+                    Price = 100
+                });
 
 
             Window window = new MainWindow
