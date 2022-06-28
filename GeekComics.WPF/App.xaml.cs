@@ -54,26 +54,34 @@ namespace GeekComics.WPF
             services.AddSingleton<IDataService<BonusAction>, GenericDataService<BonusAction>>();
             services.AddSingleton<IDataService<ProductInBusket>, GenericDataService<ProductInBusket>>();
 
+
             services.AddSingleton<IGeekComicsViewModelFactory, GeekComicsViewModelFactory>();
 
+            services.AddSingleton<ViewModelDelegateRenavigator<CatalogViewModel>>();
+            services.AddSingleton<CatalogViewModel>();
             services.AddSingleton<CreateViewModel<CatalogViewModel>>(services =>
             {
                 return () => services.GetRequiredService<CatalogViewModel>();
             });
+
+            services.AddSingleton<ProfileViewModel>();
             services.AddSingleton<CreateViewModel<ProfileViewModel>>(services =>
             {
                 return () => services.GetRequiredService<ProfileViewModel>();
             });
+
+            services.AddSingleton<OrdersViewModel>();
             services.AddSingleton<CreateViewModel<OrdersViewModel>>(services =>
             {
                 return () => services.GetRequiredService<OrdersViewModel>();
             });
+
+            services.AddSingleton<BonusesViewModel>();
             services.AddSingleton<CreateViewModel<BonusesViewModel>>(services =>
             {
                 return () => services.GetRequiredService<BonusesViewModel>();
             });
 
-            services.AddSingleton<ViewModelDelegateRenavigator<CatalogViewModel>>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
             {
                 return () => new LoginViewModel(
