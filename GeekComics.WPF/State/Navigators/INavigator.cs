@@ -16,7 +16,6 @@ namespace GeekComics.WPF.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
-        //event Action StateChanged;
+        event Action StateChanged;
     }
 }

@@ -26,6 +26,9 @@
             <DataTemplate DataType="{x:Type viewModels:BonusesViewModel}">
                 <views:BonusesView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

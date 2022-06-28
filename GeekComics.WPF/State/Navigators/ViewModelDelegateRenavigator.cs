@@ -13,7 +13,7 @@ namespace GeekComics.WPF.State.Navigators
             _createViewModel = createViewModel;
         }
 
-        public void Renabigate()
+        public void Renavigate()
         {
             _navigator.CurrentViewModel = _createViewModel();
         }

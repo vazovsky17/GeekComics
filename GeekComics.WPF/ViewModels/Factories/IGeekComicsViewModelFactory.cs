@@ -1,7 +1,9 @@
-﻿namespace GeekComics.WPF.ViewModels.Factories
+﻿using GeekComics.WPF.State.Navigators;
+
+namespace GeekComics.WPF.ViewModels.Factories
 {
-    public interface IGeekComicsViewModelFactory<T> where T : ViewModelBase
+    public interface IGeekComicsViewModelFactory
     {
-        T CreateViewModel();
+        ViewModelBase CreateViewModel(ViewType viewType);
     }
 }

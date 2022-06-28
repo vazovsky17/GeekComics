@@ -35,7 +35,6 @@ namespace GeekComics.WPF.Commands
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
 
-
         public abstract Task ExecuteAsync(object parameter);
         public async void Execute(object? parameter)
         {

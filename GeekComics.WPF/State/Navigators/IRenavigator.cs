@@ -2,6 +2,6 @@
 {
     public interface IRenavigator
     {
-        void Renabigate();
+        void Renavigate();
     }
 }

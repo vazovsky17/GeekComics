@@ -21,7 +21,7 @@ namespace GeekComics.Domain.Services.AuthentificationServices
         /// <exception cref="InvalidPasswordException">Неверный пароль.</exception>
         /// <exception cref="InvalidAdministrationCodeException">Неверно введенный код администратора.</exception>
         /// <exception cref="Exception">Вход не удался.</exception>
-        Task<Account> Login(string username, string password, string? administrationCode);
+        Task<Account> Login(string username, string password, string? administrationCode = null);
 
 
         /// <summary>
@@ -33,6 +33,6 @@ namespace GeekComics.Domain.Services.AuthentificationServices
         /// <param name="role">Роль</param>
         /// <returns>Результат регистрации</returns>
         /// <exception cref="Exception">Регистрация не удалась.</exception>
-        Task<RegistrationResult> Register(string username, string password, string confirmPassword, Role role, string? administrationCode);
+        Task<RegistrationResult> Register(string username, string password, string confirmPassword, Role role, string? administrationCode = null);
     }
 }

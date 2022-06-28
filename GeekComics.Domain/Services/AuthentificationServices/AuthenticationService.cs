@@ -17,9 +17,9 @@ namespace GeekComics.Domain.Services.AuthentificationServices
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<Account> Login(string username, string password, string? administrationCode)
+        public async Task<Account> Login(string username, string password, string? administrationCode = null)
         {
-            if (administrationCode != AdministrationCode)
+            if (administrationCode != AdministrationCode && administrationCode != null)
             {
                 throw new InvalidAdministrationCodeException();
             }
@@ -39,11 +39,11 @@ namespace GeekComics.Domain.Services.AuthentificationServices
             return storedAccount;
         }
 
-        public async Task<RegistrationResult> Register(string username, string password, string confirmPassword, Role role, string? administrationCode)
+        public async Task<RegistrationResult> Register(string username, string password, string confirmPassword, Role role, string? administrationCode = null)
         {
             RegistrationResult result = RegistrationResult.Success;
 
-            if (administrationCode != AdministrationCode)
+            if (administrationCode != AdministrationCode && administrationCode != null)
             {
                 result = RegistrationResult.InvalidAdministrationCode;
             }

@@ -37,8 +37,27 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <controls:NavigationBar Grid.Column="0" DataContext="{Binding Navigator}" />
-            <ContentControl Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}" />
+            <Grid Grid.Column="0">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoggedIn}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <controls:NavigationBar/>
+            </Grid>
+
+            <ScrollViewer
+                Grid.Column="1"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding CurrentViewModel}" />
+            </ScrollViewer>
+
         </Grid>
     </Grid>
 </Window>

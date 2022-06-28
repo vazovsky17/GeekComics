@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using GeekComics.WPF.Models;
 
 namespace GeekComics.WPF.ViewModels
 {
