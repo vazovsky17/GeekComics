@@ -12,19 +12,21 @@
     mc:Ignorable="d">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding Products}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Path=Name}"
+                            Header="Name" />
+                        <GridViewColumn
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Path=Price}"
+                            Header="Price" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-            <controls:ProductCard DataContext="{Binding ProductViewModel}" />
         </Grid>
     </ScrollViewer>
 </UserControl>

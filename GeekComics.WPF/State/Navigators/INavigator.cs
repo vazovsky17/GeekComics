@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using GeekComics.WPF.ViewModels;
 
 namespace GeekComics.WPF.State.Navigators
@@ -15,7 +16,7 @@ namespace GeekComics.WPF.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        //ICommand UpdateCurrentViewModelCommand { get; }
-        event Action StateChanged;
+        ICommand UpdateCurrentViewModelCommand { get; }
+        //event Action StateChanged;
     }
 }

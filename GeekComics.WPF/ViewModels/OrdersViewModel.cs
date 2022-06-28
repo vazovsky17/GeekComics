@@ -1,36 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using GeekComics.Domain.Models;
 using GeekComics.Domain.Services;
-using GeekComics.EntityFramework.Services;
 
 namespace GeekComics.WPF.ViewModels
 {
     public class OrdersViewModel : ViewModelBase
     {
         private readonly IDataService<Order> _dataService;
-        public IEnumerable<Order> Orders;
+        private IEnumerable<Order> _orders;
+        public IEnumerable<Order> Orders
+        {
+            get
+            {
+                return _orders;
+            }
+            set
+            {
+                _orders = value;
+                OnPropertyChanged(nameof(Orders));
+            }
+        }
 
         public OrdersViewModel(IDataService<Order> dataService)
         {
             _dataService = dataService;
+            LoadOrders();
         }
 
-        public static OrdersViewModel LoadViewModel(IDataService<Order> dataService)
+        private async void LoadOrders()
         {
-            OrdersViewModel ordersViewModel = new OrdersViewModel(dataService);
-            ordersViewModel.LoadOrders();
-            return ordersViewModel;
-        }
-
-        private void LoadOrders()
-        {
-            _dataService.GetAll().ContinueWith(task =>
+            await _dataService.GetAll().ContinueWith(task =>
             {
                 if (task.IsCompleted)
                 {
-                    Orders = task.Result;
+                    _orders = task.Result;
                 }
-            });
+            }); ;
         }
     }
 }

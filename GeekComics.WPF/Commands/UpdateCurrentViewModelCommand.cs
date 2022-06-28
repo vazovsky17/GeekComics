@@ -14,9 +14,9 @@ namespace GeekComics.WPF.Commands
         public event EventHandler? CanExecuteChanged;
 
         private readonly INavigator _navigator;
-        private readonly IGeekComicsViewModelFactory _viewModelFactory;
+        private readonly IRootGeekComicsViewModelFactory _viewModelFactory;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator, IGeekComicsViewModelFactory viewModelFactory)
+        public UpdateCurrentViewModelCommand(INavigator navigator, IRootGeekComicsViewModelFactory viewModelFactory)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;

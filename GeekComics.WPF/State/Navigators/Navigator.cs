@@ -1,11 +1,14 @@
 ﻿using System;
+using GeekComics.WPF.Commands;
+using System.Windows.Input;
 using GeekComics.WPF.ViewModels;
+using GeekComics.WPF.Models;
+using GeekComics.WPF.ViewModels.Factories;
 
 namespace GeekComics.WPF.State.Navigators
 {
-    public class Navigator : INavigator
+    public class Navigator : ObservableObject, INavigator
     {
-        public event Action StateChanged;
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
@@ -15,10 +18,16 @@ namespace GeekComics.WPF.State.Navigators
             }
             set
             {
-                _currentViewModel?.Dispose();
                 _currentViewModel = value;
-                StateChanged?.Invoke();
+                OnPropertyChanged(nameof(CurrentViewModel));
             }
+        }
+
+        public ICommand UpdateCurrentViewModelCommand { get; set; }
+
+        public Navigator(IRootGeekComicsViewModelFactory viewModelFactory)
+        {
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
         }
     }
 }

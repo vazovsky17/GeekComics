@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekComics.Domain", "GeekComics.Domain\GeekComics.Domain.csproj", "{CD29CDD6-49D0-4A8D-8CEE-C40A00467963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekComics.WPF", "GeekComics.WPF\GeekComics.WPF.csproj", "{28213097-7D88-46BD-86FC-A359541422D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekComics.EntityFramework", "GeekComics.EntityFramework\GeekComics.EntityFramework.csproj", "{E1923F0F-B5A5-4BF0-8F55-AF5C07C5B111}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekComics.Domain", "GeekComics.Domain\GeekComics.Domain.csproj", "{4AFA12BE-9B88-4436-BE83-ECE609E306A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekComics.WPF", "GeekComics.WPF\GeekComics.WPF.csproj", "{28213097-7D88-46BD-86FC-A359541422D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekComics.EntityFramework", "GeekComics.EntityFramework\GeekComics.EntityFramework.csproj", "{C1AE0F08-44DC-43BA-B779-DE1DF8BB011C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CD29CDD6-49D0-4A8D-8CEE-C40A00467963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD29CDD6-49D0-4A8D-8CEE-C40A00467963}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD29CDD6-49D0-4A8D-8CEE-C40A00467963}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD29CDD6-49D0-4A8D-8CEE-C40A00467963}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1923F0F-B5A5-4BF0-8F55-AF5C07C5B111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1923F0F-B5A5-4BF0-8F55-AF5C07C5B111}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1923F0F-B5A5-4BF0-8F55-AF5C07C5B111}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1923F0F-B5A5-4BF0-8F55-AF5C07C5B111}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28213097-7D88-46BD-86FC-A359541422D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28213097-7D88-46BD-86FC-A359541422D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28213097-7D88-46BD-86FC-A359541422D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28213097-7D88-46BD-86FC-A359541422D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFA12BE-9B88-4436-BE83-ECE609E306A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFA12BE-9B88-4436-BE83-ECE609E306A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFA12BE-9B88-4436-BE83-ECE609E306A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFA12BE-9B88-4436-BE83-ECE609E306A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1AE0F08-44DC-43BA-B779-DE1DF8BB011C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AE0F08-44DC-43BA-B779-DE1DF8BB011C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AE0F08-44DC-43BA-B779-DE1DF8BB011C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AE0F08-44DC-43BA-B779-DE1DF8BB011C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

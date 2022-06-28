@@ -26,9 +26,6 @@
             <DataTemplate DataType="{x:Type viewModels:BonusesViewModel}">
                 <views:BonusesView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ProductViewModel}">
-                <controls:ProductCard />
-            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

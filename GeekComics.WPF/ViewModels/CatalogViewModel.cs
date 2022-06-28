@@ -1,65 +1,46 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using GeekComics.Domain.Models;
-using GeekComics.EntityFramework.Services;
+using GeekComics.Domain.Services;
 
 namespace GeekComics.WPF.ViewModels
 {
     public class CatalogViewModel : ViewModelBase
     {
-        private readonly GenericDataService<Product> _dataService;
-        private ProductViewModel _productViewModel;
-        public ProductViewModel ProductViewModel
+        private readonly IDataService<Product> _dataService;
+
+        private IEnumerable<Product> _products;
+        public IEnumerable<Product> Products
         {
             get
             {
-                return _productViewModel;
+                return _products;
             }
             set
             {
-                _productViewModel = value;
-                OnPropertyChanged(nameof(ProductViewModel));
+                _products = value;
+                OnPropertyChanged(nameof(Products));
             }
         }
 
-        public IEnumerable<ProductViewModel> Products;
-        private IEnumerable<Product> _products;
-
-        public CatalogViewModel(GenericDataService<Product> dataService)
+        public CatalogViewModel(IDataService<Product> dataService)
         {
             _dataService = dataService;
+            LoadProducts();
         }
 
-        public static CatalogViewModel LoadViewModel(GenericDataService<Product> dataService)
+        public async void LoadProducts()
         {
-            CatalogViewModel catalogViewModel = new(dataService);
-            catalogViewModel.LoadProducts();
-            return catalogViewModel;
-        }
-
-        private void LoadProducts()
-        {
-            _dataService.GetAll().ContinueWith(task =>
+            await _dataService.GetAll().ContinueWith(task =>
             {
                 if (task.IsCompleted)
                 {
-                    // TODO: Сделать отображение всех товаров ИЛИ ХОТЯ БЫ ОДНОГО, ЧЕРТ ВОЗЬМИ
                     _products = task.Result;
-                    foreach (var item in _products)
-                    {
-
-                    }
-                    ProductViewModel = new ProductViewModel(_products.FirstOrDefault());
-                    //MessageBox.Show(_products.FirstOrDefault().Name.ToString());
                 }
-                else
-                {
-                    MessageBox.Show("Что-то не так");
-                }
+                MessageBox.Show(_products.FirstOrDefault().Name);
             });
-
         }
     }
 }

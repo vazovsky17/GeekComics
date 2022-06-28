@@ -9,6 +9,36 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <Label Content="Orders" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Orders" />
+        <ListView Grid.Row="1" ItemsSource="{Binding Orders}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Order Name">
+                    <GridViewColumn
+                        Width="auto"
+                        DisplayMemberBinding="{Binding Path=Buyer}"
+                        Header="Buyer" />
+                    <GridViewColumn
+                        Width="auto"
+                        DisplayMemberBinding="{Binding Path=Price}"
+                        Header="Price" />
+                    <GridViewColumn
+                        Width="auto"
+                        DisplayMemberBinding="{Binding Path=DateCreated}"
+                        Header="Date Created" />
+                    <GridViewColumn
+                        Width="auto"
+                        DisplayMemberBinding="{Binding Path=DateDelivered}"
+                        Header="Date Delivered" />
+                    <GridViewColumn
+                        Width="auto"
+                        DisplayMemberBinding="{Binding Path=IsCancelled}"
+                        Header="Is Cancelled" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
