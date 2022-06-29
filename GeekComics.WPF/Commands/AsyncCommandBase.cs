@@ -23,24 +23,27 @@ namespace GeekComics.WPF.Commands
             }
         }
 
-        public bool CanExecute(object? parameter)
+        public event EventHandler CanExecuteChanged;
+
+        public virtual bool CanExecute(object parameter)
         {
             return !IsExecuting;
         }
-        
-        public event EventHandler? CanExecuteChanged;
-        // TODO: Подробнее узнать, для чего все эти евенты и экшены
-        private void OnCanExecuteChanged()
+
+        public async void Execute(object parameter)
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            IsExecuting = true;
+
+            await ExecuteAsync(parameter);
+
+            IsExecuting = false;
         }
 
         public abstract Task ExecuteAsync(object parameter);
-        public async void Execute(object? parameter)
+
+        protected void OnCanExecuteChanged()
         {
-            IsExecuting = true;
-            await ExecuteAsync(parameter);
-            IsExecuting = false;
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

@@ -1,15 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
 namespace GeekComics.EntityFramework
 {
-    public class GeekComicsDbContextFactory : IDesignTimeDbContextFactory<GeekComicsDbContext>
+    public class GeekComicsDbContextFactory
     {
-        public GeekComicsDbContext CreateDbContext(string[] args = null)
+        private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+
+        public GeekComicsDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
         {
-            string sqlServerString = "Server=(localdb)\\MSSQLLocalDB;Database=GeekComics;Trusted_Connection=True";
-            var options = new DbContextOptionsBuilder<GeekComicsDbContext>();
-            options.UseSqlServer(sqlServerString);
+            _configureDbContext = configureDbContext;
+        }
+
+        public GeekComicsDbContext CreateDbContext()
+        {
+            DbContextOptionsBuilder<GeekComicsDbContext> options = new DbContextOptionsBuilder<GeekComicsDbContext>();
+
+            _configureDbContext(options);
+
             return new GeekComicsDbContext(options.Options);
         }
     }

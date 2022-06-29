@@ -38,7 +38,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <controls:NavigationBar/>
+                <controls:NavigationBar />
             </Grid>
 
             <ScrollViewer
