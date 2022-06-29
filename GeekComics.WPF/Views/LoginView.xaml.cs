@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 
 namespace GeekComics.WPF.Views
 {
@@ -9,28 +7,9 @@ namespace GeekComics.WPF.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
-        public static readonly DependencyProperty LoginCommandProperty =
-    DependencyProperty.Register("LoginCommand", typeof(ICommand), typeof(LoginView), new PropertyMetadata(null));
-
-        public ICommand LoginCommand
-        {
-            get { return (ICommand) GetValue(LoginCommandProperty); }
-            set { SetValue(LoginCommandProperty, value); }
-        }
-
-
         public LoginView()
         {
             InitializeComponent();
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            if (LoginCommand != null)
-            {
-                string password = pbPassword.Password;
-                LoginCommand.Execute(password);
-            }
         }
     }
 }

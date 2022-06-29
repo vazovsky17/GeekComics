@@ -27,7 +27,10 @@
                 <views:BonusesView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <views:LoginView LoginCommand="{Binding LoginCommand}" />
+                <views:LoginView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RegisterViewModel}">
+                <views:RegisterView />
             </DataTemplate>
 
         </ResourceDictionary>
