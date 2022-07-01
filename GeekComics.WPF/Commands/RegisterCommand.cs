@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using GeekComics.Domain.Services.AuthentificationServices;
 using GeekComics.WPF.State.Authentificators;
 using GeekComics.WPF.State.Navigators;
@@ -38,7 +39,7 @@ namespace GeekComics.WPF.Commands
                        _registerViewModel.Username,
                        _registerViewModel.Password,
                        _registerViewModel.ConfirmPassword,
-                       _registerViewModel.Role);
+                       _registerViewModel.SelectedRole);
 
                 switch (registrationResult)
                 {
@@ -47,6 +48,9 @@ namespace GeekComics.WPF.Commands
                         break;
                     case RegistrationResult.PasswordsDoNotMatch:
                         _registerViewModel.ErrorMessage = "Password does not match confirm password.";
+                        break;
+                    case RegistrationResult.InvalidAdministrationCode:
+                        _registerViewModel.ErrorMessage = "Invalidate administration code.";
                         break;
                     case RegistrationResult.UsernameAlreadyExists:
                         _registerViewModel.ErrorMessage = "An account for this username already exists.";

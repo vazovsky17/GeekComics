@@ -56,7 +56,7 @@ namespace GeekComics.Domain.Services.AuthentificationServices
             Account storedAccount = await _accountService.GetByUsername(username);
             if (storedAccount != null)
             {
-                result = RegistrationResult.PasswordsDoNotMatch;
+                result = RegistrationResult.UsernameAlreadyExists;
             }
 
             if (result == RegistrationResult.Success)
@@ -66,12 +66,14 @@ namespace GeekComics.Domain.Services.AuthentificationServices
                 {
                     Username = username,
                     PasswordHash = hashedPassword,
+                    Role = role,
                 };
 
                 Account account = new()
                 {
                     AccountHolder = user,
                     BonusCount = 500,
+                    AddressDelivery = "",
                 };
 
                 await _accountService.Create(account);

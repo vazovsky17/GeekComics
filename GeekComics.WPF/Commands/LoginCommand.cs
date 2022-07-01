@@ -27,7 +27,7 @@ namespace GeekComics.WPF.Commands
             try
             {
                 //TODO: Добавить подтверждение если роль админ
-                await _authenticator.Login(_loginViewModel.Username, parameter.ToString());
+                await _authenticator.Login(_loginViewModel.Username, _loginViewModel.Password);
                 _renavigator.Renavigate();
             }
             catch (UserNotFoundException)

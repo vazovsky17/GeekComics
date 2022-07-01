@@ -23,6 +23,7 @@
             Grid.Row="0"
             HorizontalAlignment="Center"
             FontSize="48"
+            Foreground="{StaticResource CardButtonForegroundSolidBrush}"
             Text="Simple Trader" />
 
         <TextBlock
@@ -31,6 +32,7 @@
             HorizontalAlignment="Center"
             FontSize="18"
             FontWeight="Thin"
+            Foreground="{StaticResource CardButtonForegroundSolidBrush}"
             Text="The world's simplest stock trading application." />
 
         <Grid Grid.Row="2" Margin="0,20">
@@ -50,7 +52,10 @@
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Username" />
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource ActiveButtonForeroundSolidBrush}"
+                    Text="Username" />
                 <TextBox
                     Grid.Column="1"
                     Margin="20,0,0,0"
@@ -63,7 +68,10 @@
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Password" />
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource ActiveButtonForeroundSolidBrush}"
+                    Text="Password" />
                 <components:BindablePasswordBox
                     Grid.Column="1"
                     Margin="20,0,0,0"
@@ -76,21 +84,41 @@
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Confirm Password" />
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource ActiveButtonForeroundSolidBrush}"
+                    Text="Confirm Password" />
                 <components:BindablePasswordBox
                     Grid.Column="1"
                     Margin="20,0,0,0"
                     Password="{Binding ConfirmPassword}" />
             </Grid>
 
+            <Grid Grid.Row="3" Margin="0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource ActiveButtonForeroundSolidBrush}"
+                    Text="Role" />
+                <ComboBox
+                    Grid.Column="1"
+                    Margin="20,0,0,0"
+                    ItemsSource="{Binding Roles}"
+                    SelectedItem="{Binding SelectedRole}"/>
+            </Grid>
+
             <Button
                 Grid.Row="4"
                 Margin="0,10"
-                Style="{StaticResource CardButton}"
                 HorizontalAlignment="Center"
                 Command="{Binding RegisterCommand}"
                 Content="Register"
-                IsDefault="True" />
+                IsDefault="True"
+                Style="{StaticResource CardButton}" />
 
             <Button
                 Grid.Row="5"
@@ -100,7 +128,7 @@
                 Command="{Binding ViewLoginCommand}"
                 Content="Already have an account?"
                 FontSize="14"
-                Foreground="Blue" />
+                Foreground="{StaticResource ActiveButtonForeroundSolidBrush}" />
 
             <TextBlock
                 Grid.Row="6"
